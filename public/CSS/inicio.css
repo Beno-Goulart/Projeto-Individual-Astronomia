@@ -1,0 +1,87 @@
+/* Remove margem padrão do body */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+}
+
+.banner video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -1; /* Garante que o vídeo fique atrás do conteúdo */
+    object-fit: cover; /* Preenche a tela sem distorcer */
+}
+
+.content {
+    position: relative;
+    z-index: 1;
+    color: white;
+    text-align: center;
+    padding: 100px;
+}
+
+#cabecalho .nav {
+    width: 100%;
+    height: 12.3vh;
+    position: fixed;
+    background-color: #00000059;
+    display: flex;
+    justify-content: space-around;
+    gap: 10%;
+    align-items: center;
+    z-index: 2;
+    color: #F4F4F4;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(2px);
+}
+
+nav p {
+    height: 5vw;
+    margin-top: 2vh;
+    align-items: center;
+    display: flex;
+    width: 7vw;
+    justify-content: center;
+    text-align: center;
+}
+
+/*efeito quando o mouse passat na tag p para mudar a negrito, e agregar um border baixo, e uma transição*/
+nav p:hover {
+    font-weight: 800;
+    border-bottom: 3px solid #ffffff;
+    transition: all 0.1s ease;
+
+}
+
+.nav-list1 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 30vw;
+}
+
+.div_logo , .nav-list2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3%;
+}
+nav img{
+    width: 50%;
+}
+#logotipo:hover{
+    width: 55%;
+}
+#cadastre-se {
+    border: solid 2px  var(--vinho);
+    border-radius: 2vw;
+    height: 3vw;
+}
+
+#cadastre-se:hover {
+    background-color: var(--vinho);
+}
