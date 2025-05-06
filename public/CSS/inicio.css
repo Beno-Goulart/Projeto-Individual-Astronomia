@@ -70,12 +70,19 @@ nav p:hover {
     align-items: center;
     gap: 3%;
 }
-nav img{
-    width: 50%;
+nav img {
+    max-height: 60px;
+    width: auto;
+    transition: transform 0.2s ease;
 }
-#logotipo:hover{
-    width: 55%;
+#logotipo {
+    filter: brightness(0) invert(1);
 }
+
+#logotipo:hover {
+    transform: scale(1.1);
+}
+
 #cadastre-se {
     border: solid 2px  var(--vinho);
     border-radius: 2vw;
@@ -84,4 +91,69 @@ nav img{
 
 #cadastre-se:hover {
     background-color: var(--vinho);
+}
+
+.content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 100px;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: white;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+}
+
+.content-inner {
+    max-width: 800px;
+    padding: 20px;
+    animation: fadeIn 2s ease-in-out;
+}
+
+.titulo {
+    font-size: 3em;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.subtitulo {
+    font-size: 1.5em;
+    margin-bottom: 30px;
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 15px 30px;
+    font-size: 1em;
+    background-color: #bb840d;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+.cta-button:hover {
+    background-color: #6e6e6e;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+nav a {
+    text-decoration: none;
+    color: white;
 }
