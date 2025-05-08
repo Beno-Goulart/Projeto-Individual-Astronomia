@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    <header id="cabecalho">
+    <!-- <header id="cabecalho">
         <nav class="nav">
             <div class="div_logo">
                 <a href="#cabecalho">
@@ -42,11 +42,12 @@
                 </a></li>
             </div>
         </nav>
-    </header>
+    </header> -->
 
     <div class="banner">
         <video autoplay muted loop>
-            <source src="../assets/meiaLua.mp4" type="video/mp4">
+            <link rel="stylesheet" href="">
+            <source src="../assets/lua.mp4" type="video/mp4">
         </video>
     </div>
 
@@ -80,3 +81,10 @@
 </body>
 
 </html>
+<script>
+        window.addEventListener('load', function () {
+            setTimeout(function () {
+                document.getElementById('moonOverlay').classList.add('visible');
+            }, 5000);
+        });
+    </script>

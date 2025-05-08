@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../CSS/marte.css">
+    <title>Marte</title>
+</head>
+
+<body>
+
+    <div class="banner">
+        <video autoplay muted>
+            <source src="../assets/mars.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <div class="mars-overlay" id="marsOverlay">
+        <div class="mars-title">Marte</div>
+    
+        <div class="mars-info left">
+            <p><strong>DISTÂNCIA ORBITAL:</strong> 227.943.824 KM</p>
+            <p><strong>INCLINAÇÃO AXIAL:</strong> 25,19°</p>
+        </div>
+    
+        <div class="mars-info right">
+            <p><strong>DIÂMETRO:</strong> 6.779 KM</p>
+            <p><strong>MASSA:</strong> 6,4171×10²³ KG</p>
+            <p><strong>TEMP. SUPERFÍCIE:</strong> −125°C a +20°C</p>
+        </div>
+    
+        <div class="mars-info bottom">
+            <p><strong>PERÍODO ORBITAL:</strong> 687 DIAS TERRESTRES</p>
+            <p><strong>DURAÇÃO DO DIA:</strong> 24h 37min</p>
+        </div>
+    
+        <div class="mars-info top-right">
+            <p>CO₂ = 95,3%</p>
+            <p>N₂ = 2,7%</p>
+            <p>Ar = 1,6%</p>
+            <p>O₂ = 0,13%</p>
+            <p>CO = 0,08%</p>
+        </div>
+    </div>
+    
+
+    <script>
+        window.addEventListener('load', function () {
+            setTimeout(function () {
+                document.getElementById('marsOverlay').classList.add('visible');
+            }, 5000);
+        });
+        
+    </script>
+
+</body>
+
+</html>
