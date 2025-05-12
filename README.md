@@ -103,7 +103,7 @@ Ainda não estamos recebendo contribuições externas neste momento. Em breve se
 
 ## 📌 Observações
 
-- **Licença**: Ainda não definida. Uma licença define os termos de uso e distribuição do seu projeto (ex: MIT, GPL, etc). Se quiser ajuda para escolher uma, posso te orientar!
+- **Licença**: Ainda não definida.
 
 - **Deploy**: No momento, o projeto não está disponível em ambiente de produção.
 
