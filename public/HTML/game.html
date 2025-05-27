@@ -1,13 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../CSS/game.css">
     <link rel="icon" type="image/png" href="../assets/pixelship.png" />
     <title>Aventura</title>
-    
+
 </head>
+
 <body>
-    
+
+    <div id="backstory"></div>
+    <div id="game">
+        <p><strong>🚨 Você acorda sozinho após uma falha na hibernação. O que deseja fazer?</strong></p>
+        <button onclick="choose('Verificar sistemas da nave')">A) Verificar sistemas da nave</button><br>
+        <button onclick="choose('Procurar por outros tripulantes')">B) Procurar por outros tripulantes</button><br>
+        <button onclick="choose('Mandar sinal para Terra ou resposta alienígena detectada')">C) Mandar sinal para Terra
+            ou resposta alienígena detectada</button>
+    </div>
 </body>
+
 </html>
+<script src="../JS/game.js"></script>
