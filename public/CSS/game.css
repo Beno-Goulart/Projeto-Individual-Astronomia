@@ -91,12 +91,12 @@ button::before {
   transition: width 0.3s ease-in-out;
 }
 
-/* button:hover::before {
+button:hover::before {
   width: 100%;
-} */
+}
 
 button:hover {
-  color: #09a2bc;
+  color: #000000;
 }
 
 @keyframes fadeIn {
