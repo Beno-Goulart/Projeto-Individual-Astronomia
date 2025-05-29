@@ -54,7 +54,7 @@ html {
     letter-spacing: 1px;
     line-height: 1.5em;
     color: #ccc;
-    text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0);
 }
 
 .mars-info.left {

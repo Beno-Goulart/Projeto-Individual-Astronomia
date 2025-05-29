@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard | Jornada do Astronauta</title>
+  <link rel="stylesheet" href="../CSS/dashboard.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+  <div class="dashboard-container">
+    <aside class="sidebar">
+      <h2>📈 Painel</h2>
+      <ul>
+        <li><button>Visão Geral</button></li>
+        <li><button>Estatísticas do Jogo</button></li>
+        <li><button>Comparativo de Jogadores</button></li>
+      </ul>
+    </aside>
+
+    <main class="content">
+      <h1>📊 Dados da Jornada</h1>
+
+      <div class="cards">
+        <div class="card">
+          <h3>Total de Jogadores</h3>
+          <p>245</p>
+        </div>
+        <div class="card">
+          <h3>Decisão Mais Comum</h3>
+          <p>Desligar o sistema auxiliar</p>
+        </div>
+        <div class="card">
+          <h3>Final Mais Alcançado</h3>
+          <p>Missão Cumprida</p>
+        </div>
+        <div class="card">
+          <h3>Tempo Médio de Jogo</h3>
+          <p>7 min 12 s</p>
+        </div>
+      </div>
+
+      <div class="charts-grid">
+        <div class="chart-card">
+          <h3>Distribuição de Escolhas</h3>
+          <canvas id="pizzaChart"></canvas>
+        </div>
+
+        <div class="chart-card">
+          <h3>Finais Alcançados</h3>
+          <canvas id="barChart"></canvas>
+        </div>
+
+        <div class="chart-card">
+          <h3>Tempo Médio por Etapa</h3>
+          <canvas id="lineChart"></canvas>
+        </div>
+
+        <div class="chart-card">
+          <h3>Tempo Total por Jogador</h3>
+          <canvas id="areaChart"></canvas>
+        </div>
+
+        <div class="chart-card">
+          <h3>Perfil de Decisões</h3>
+          <canvas id="radarChart"></canvas>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // Pizza - Distribuição de escolhas por etapa
+    new Chart(document.getElementById('pizzaChart'), {
+      type: 'pie',
+      data: {
+        labels: ['Desligar sistema', 'Chamar ajuda', 'Investigar ruído', 'Ignorar alerta'],
+        datasets: [{
+          data: [40, 30, 20, 10],
+          backgroundColor: ['#4bc0c0', '#ff9f40', '#9966ff', '#ff6384']
+        }]
+      },
+      options: { plugins: { legend: { labels: { color: '#fff' } } } }
+    });
+
+    // Barras - Finais
+    new Chart(document.getElementById('barChart'), {
+      type: 'bar',
+      data: {
+        labels: ['Missão Cumprida', 'Missão Fracassada', 'Civilização Alien', 'Traição', 'Sacrifício'],
+        datasets: [{
+          label: 'Quantidade',
+          data: [95, 50, 35, 40, 25],
+          backgroundColor: '#36a2eb'
+        }]
+      },
+      options: {
+        scales: { x: { ticks: { color: '#fff' } }, y: { ticks: { color: '#fff' } } },
+        plugins: { legend: { labels: { color: '#fff' } } }
+      }
+    });
+
+    // Linha - Tempo médio por etapa
+    new Chart(document.getElementById('lineChart'), {
+      type: 'line',
+      data: {
+        labels: ['Etapa 1', 'Etapa 2', 'Etapa 3', 'Etapa 4', 'Etapa 5'],
+        datasets: [{
+          label: 'Tempo Médio (s)',
+          data: [30, 45, 60, 35, 50],
+          borderColor: '#ffcd56',
+          backgroundColor: 'rgba(255, 205, 86, 0.3)',
+          fill: true,
+          tension: 0.4
+        }]
+      },
+      options: {
+        scales: { x: { ticks: { color: '#fff' } }, y: { ticks: { color: '#fff' } } },
+        plugins: { legend: { labels: { color: '#fff' } } }
+      }
+    });
+
+    // Área - Tempo total de jogo por jogador
+    new Chart(document.getElementById('areaChart'), {
+      type: 'line',
+      data: {
+        labels: ['Jogador 1', 'Jogador 2', 'Jogador 3', 'Jogador 4', 'Jogador 5'],
+        datasets: [{
+          label: 'Tempo Total (s)',
+          data: [420, 480, 390, 520, 450],
+          backgroundColor: 'rgba(54, 162, 235, 0.3)',
+          borderColor: '#36a2eb',
+          fill: true,
+          tension: 0.3
+        }]
+      },
+      options: {
+        scales: { x: { ticks: { color: '#fff' } }, y: { ticks: { color: '#fff' } } },
+        plugins: { legend: { labels: { color: '#fff' } } }
+      }
+    });
+
+    // Radar - Perfil de decisões
+    new Chart(document.getElementById('radarChart'), {
+      type: 'radar',
+      data: {
+        labels: ['Cauteloso', 'Impulsivo', 'Analítico', 'Emocional', 'Explorador'],
+        datasets: [{
+          label: 'Média dos jogadores',
+          data: [3, 2, 4, 1, 5],
+          backgroundColor: 'rgba(255, 99, 132, 0.2)',
+          borderColor: '#ff6384'
+        }]
+      },
+      options: {
+  scales: {
+    r: {
+      ticks: {
+        backdropColor: 'transparent', // funciona a partir do Chart.js v4
+        color: '#fff'
+      },
+      grid: {
+        color: '#444'
+      },
+      pointLabels: {
+        color: '#00d1ff'
+      }
+    }
+  }
+}
+
+    });
+  </script>
+
+</body>
+
+</html>
