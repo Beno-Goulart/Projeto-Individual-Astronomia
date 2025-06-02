@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard | Jornada do Astronauta</title>
+  <link rel="stylesheet" href="../CSS/dashboard.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+  <div class="dashboard-container">
+    <aside class="sidebar">
+      <h2>Painel</h2>
+      <ul>
+        <li><button>Visão Geral</button></li>
+        <li><button>Estatísticas do Jogo</button></li>
+        <li><button>Comparativo de Jogadores</button></li>
+      </ul>
+    </aside>
+
+    <main class="content">
+      <h1>Dados da Jornada</h1>
+
+      <div class="cards">
+        <div class="card">
+          <h3>Total de Jogadores</h3>
+          <p>245</p>
+        </div>
+        <div class="card">
+          <h3>Decisão Mais Comum</h3>
+          <p>Desligar o sistema auxiliar</p>
+        </div>
+        <div class="card">
+          <h3>Final Mais Alcançado</h3>
+          <p>Missão Cumprida</p>
+        </div>
+        <div class="card">
+          <h3>Tempo Médio de Jogo</h3>
+          <p>7 min 12 s</p>
+        </div>
+      </div>
+
+      <div class="charts-grid">
+        <div class="chart-card">
+          <h3>Distribuição de Escolhas</h3>
+          <canvas id="pizzaChart"></canvas>
+        </div>
+
+        <div class="chart-card">
+          <h3>Finais Alcançados</h3>
+          <canvas id="barChart"></canvas>
+        </div>
+
+        <div class="chart-card">
+          <h3>Tempo Médio por Etapa</h3>
+          <canvas id="lineChart"></canvas>
+        </div>
+
+        <div class="chart-card">
+          <h3>Tempo Total por Jogador</h3>
+          <canvas id="areaChart"></canvas>
+        </div>
+
+        <div class="chart-card">
+          <h3>Perfil de Decisões</h3>
+          <canvas id="radarChart"></canvas>
+        </div>
+      </div>
+    </main>
+  </div>
+
+</body>
+
+</html>
+<script src="../JS/dashboard.js"></script>
