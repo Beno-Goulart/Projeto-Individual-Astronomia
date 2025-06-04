@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
 
-/* Reset e fontes */
 * {
   margin: 0;
   padding: 0;
@@ -15,13 +14,11 @@ body {
   display: flex;
 }
 
-/* Container principal */
 .dashboard-container {
   display: flex;
   width: 100%;
 }
 
-/* Sidebar */
 .sidebar {
   width: 240px;
   background: #11132b;
@@ -62,7 +59,6 @@ body {
   background: #31366f;
 }
 
-/* Conteúdo principal */
 .content {
   flex: 1;
   padding: 40px;
@@ -76,7 +72,6 @@ body {
   color: #ffffff;
 }
 
-/* Cards */
 .cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -107,7 +102,6 @@ body {
   font-weight: bold;
 }
 
-/* Gráficos */
 .charts-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -125,24 +119,4 @@ body {
   margin-bottom: 15px;
   font-size: 1rem;
   color: #9ae3ff;
-}
-
-/* Responsividade */
-@media (max-width: 768px) {
-  .dashboard-container {
-    flex-direction: column;
-  }
-
-  .sidebar {
-    width: 100%;
-    flex-direction: row;
-    gap: 10px;
-    height: auto;
-    overflow-x: auto;
-    padding: 15px;
-  }
-
-  .content {
-    padding: 20px;
-  }
 }

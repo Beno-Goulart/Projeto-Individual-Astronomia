@@ -25,7 +25,7 @@ function cadastrar() {
     .then(res => {
         if (res.ok) {
             alert("Cadastro realizado com sucesso!");
-            window.location.href = "index.html"; // volta para login
+            window.location.href = "index.html";
         } else {
             alert("Erro no cadastro");
         }
@@ -52,7 +52,6 @@ function login() {
     })
     .then(data => {
         alert(`Bem-vindo, ${data.nome}!`);
-        // Aqui você pode redirecionar para sua dashboard
         window.location.href = "dashboard.html";
     })
     .catch(erro => {

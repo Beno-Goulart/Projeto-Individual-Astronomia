@@ -1,57 +1,59 @@
--- create database spacexplore;
--- use spacexplore;
+-- DROP DATABASE spacexplore;
+CREATE DATABASE spacexplore;
+USE spacexplore;
 
 -- Usuários
-create table usuarios (
-    id int primary key auto_increment,
-    nome varchar(100) not null,
-    email varchar(100) unique not null,
-    senha_hash varchar(255) not null,
-    data_cadastro datetime default current_timestamp
+CREATE TABLE usuarios (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    senha_hash VARCHAR(255) NOT NULL,
+    data_cadastro DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Possíveis finais do jogo
-create table finais (
-    id int primary key auto_increment,
-    titulo varchar(100) not null,
-    descricao text
+CREATE TABLE finais (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    titulo VARCHAR(100) NOT NULL,
+    descricao TEXT
 );
 
 -- Sessões de jogo (cada jogada feita por um usuário)
-create table sessoes_jogo (
-    id int primary key auto_increment,
-    usuario_id int,
-    data_inicio datetime default current_timestamp,
-    data_fim datetime,
-    final_id int,
-    tempo_total_segundos int,
-    foreign key (usuario_id) references usuarios(id),
-    foreign key (final_id) references finais(id)
+CREATE TABLE sessoes_jogo (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    usuario_id INT,
+    data_inicio DATETIME DEFAULT CURRENT_TIMESTAMP,
+    data_fim DATETIME,
+    final_id INT,
+    tempo_total_segundos INT,
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE,
+    FOREIGN KEY (final_id) REFERENCES finais(id) ON DELETE SET NULL
 );
 
 -- Decisões disponíveis em cada etapa
-create table decisoes (
-    id int primary key auto_increment,
-    etapa varchar(50) not null,
-    texto_opcao varchar(255) not null,
-    tipo_perfil varchar(50)  -- Ex: 'impulsivo', 'cauteloso'
+CREATE TABLE decisoes (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    etapa VARCHAR(50) NOT NULL,
+    texto_opcao VARCHAR(255) NOT NULL
 );
 
 -- Decisões feitas por cada usuário em uma sessão
-create table escolhas (
-    id int primary key auto_increment,
-    sessao_id int,
-    decisao_id int,
-    tempo_gasto_segundos int,
-    ordem_etapa int,
-    foreign key (sessao_id) references sessoes_jogo(id),
-    foreign key (decisao_id) references decisoes(id)
+CREATE TABLE escolhas (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    sessao_id INT,
+    decisao_id INT,
+    tempo_gasto_segundos INT,
+    ordem_etapa INT,
+    FOREIGN KEY (sessao_id) REFERENCES sessoes_jogo(id) ON DELETE CASCADE,
+    FOREIGN KEY (decisao_id) REFERENCES decisoes(id) ON DELETE CASCADE
 );
 
-insert into finais (titulo, descricao) values
+-- Dados fixos dos finais do jogo
+INSERT INTO finais (titulo, descricao) VALUES
 ('Missão Cumprida', 'Você conserta a nave e chega ao planeta habitável.'),
 ('Missão Fracassada', 'A nave é destruída e você não sobrevive.'),
 ('Civilização Alienígena', 'Você encontra e vive entre alienígenas.'),
 ('Sobrevivente Solitário', 'Você trai a missão para sobreviver sozinho.'),
 ('Sacrifício Heróico', 'Você se sacrifica para salvar a missão.');
 
+select * from sessoes_jogo;

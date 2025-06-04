@@ -1,5 +1,5 @@
 window.addEventListener('load', function () {
-    setTimeout(function () {
+    (function () {setTimeout
         document.getElementById('marsOverlay').classList.add('visible');
     }, 5000);
 });

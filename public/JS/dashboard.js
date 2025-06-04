@@ -28,45 +28,45 @@ new Chart(document.getElementById('barChart'), {
     }
 });
 
-// Linha - Tempo médio por etapa
-new Chart(document.getElementById('lineChart'), {
-    type: 'line',
-    data: {
-        labels: ['Etapa 1', 'Etapa 2', 'Etapa 3', 'Etapa 4', 'Etapa 5'],
-        datasets: [{
-            label: 'Tempo Médio (s)',
-            data: [30, 45, 60, 35, 50],
-            borderColor: '#ffcd56',
-            backgroundColor: 'rgba(255, 205, 86, 0.3)',
-            fill: true,
-            tension: 0.4
-        }]
-    },
-    options: {
-        scales: { x: { ticks: { color: '#fff' } }, y: { ticks: { color: '#fff' } } },
-        plugins: { legend: { labels: { color: '#fff' } } }
-    }
-});
+// // Linha - Tempo médio por etapa
+// new Chart(document.getElementById('lineChart'), {
+//     type: 'line',
+//     data: {
+//         labels: ['Etapa 1', 'Etapa 2', 'Etapa 3', 'Etapa 4', 'Etapa 5'],
+//         datasets: [{
+//             label: 'Tempo Médio (s)',
+//             data: [30, 45, 60, 35, 50],
+//             borderColor: '#ffcd56',
+//             backgroundColor: 'rgba(255, 205, 86, 0.3)',
+//             fill: true,
+//             tension: 0.4
+//         }]
+//     },
+//     options: {
+//         scales: { x: { ticks: { color: '#fff' } }, y: { ticks: { color: '#fff' } } },
+//         plugins: { legend: { labels: { color: '#fff' } } }
+//     }
+// });
 
-// Área - Tempo total de jogo por jogador
-new Chart(document.getElementById('areaChart'), {
-    type: 'line',
-    data: {
-        labels: ['Jogador 1', 'Jogador 2', 'Jogador 3', 'Jogador 4', 'Jogador 5'],
-        datasets: [{
-            label: 'Tempo Total (s)',
-            data: [420, 480, 390, 520, 450],
-            backgroundColor: 'rgba(54, 162, 235, 0.3)',
-            borderColor: '#36a2eb',
-            fill: true,
-            tension: 0.3
-        }]
-    },
-    options: {
-        scales: { x: { ticks: { color: '#fff' } }, y: { ticks: { color: '#fff' } } },
-        plugins: { legend: { labels: { color: '#fff' } } }
-    }
-});
+// // Área - Tempo total de jogo por jogador
+// new Chart(document.getElementById('areaChart'), {
+//     type: 'line',
+//     data: {
+//         labels: ['Jogador 1', 'Jogador 2', 'Jogador 3', 'Jogador 4', 'Jogador 5'],
+//         datasets: [{
+//             label: 'Tempo Total (s)',
+//             data: [420, 480, 390, 520, 450],
+//             backgroundColor: 'rgba(54, 162, 235, 0.3)',
+//             borderColor: '#36a2eb',
+//             fill: true,
+//             tension: 0.3
+//         }]
+//     },
+//     options: {
+//         scales: { x: { ticks: { color: '#fff' } }, y: { ticks: { color: '#fff' } } },
+//         plugins: { legend: { labels: { color: '#fff' } } }
+//     }
+// });
 
 // Radar - Perfil de decisões
 new Chart(document.getElementById('radarChart'), {
@@ -84,17 +84,23 @@ new Chart(document.getElementById('radarChart'), {
         scales: {
             r: {
                 ticks: {
-                    backdropColor: 'transparent', // funciona a partir do Chart.js v4
-                    color: '#FFF'
+                    backdropColor: 'transparent',
+                    color: '#fff'
                 },
                 grid: {
                     color: '#999'
                 },
                 pointLabels: {
-                    color: '#00d1ff'
+                    color: '#fff'
+                }
+            }
+        },
+        plugins: {
+            legend: {
+                labels: {
+                    color: '#fff'
                 }
             }
         }
     }
-
 });

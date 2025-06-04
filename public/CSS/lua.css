@@ -159,18 +159,6 @@ nav img {
     background-color: var(--vinho);
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
 nav a {
     text-decoration: none;
     color: white;

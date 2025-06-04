@@ -1,132 +1,223 @@
-const story = document.getElementById("story");
-const choices = document.getElementById("choices");
-const ending = document.getElementById("ending");
+var historia = document.getElementById("historia");
+var escolha = document.getElementById("escolha");
+var final = document.getElementById("final");
 
-let etapa = "inicio";
+var etapa = "inicio";
 
-const finais = {
-  final1: "🏁 Final 1: Missão Cumprida - Você repara a nave e chega ao planeta habitável.",
-  final2: "💀 Final 2: Missão Fracassada - A nave é perdida e você perece.",
-  final3: "👽 Final 3: Civilização Alienígena - Você é acolhido por alienígenas avançados.",
-  final4: "🚀 Final 4: Sobrevivente Solitário - Você foge e sobrevive, mas trai tudo.",
-  final5: "🧬 Final 5: Sacrifício Heróico - Você morre salvando a missão."
+var finais = {
+  final1: "Missão Cumprida - Você repara a nave e chega ao planeta habitável.",
+  final2: "Missão Fracassada - A nave é perdida e você perece.",
+  final3: "Civilização Alienígena - Você é acolhido por alienígenas avançados.",
+  final4: "Sobrevivente Solitário - Você foge e sobrevive, mas trai tudo.",
+  final5: "Sacrifício Heróico - Você morre salvando a missão."
 };
 
-function escreverTextoGradualmente(texto, callback) {
-  story.textContent = "";
-  ending.textContent = "";
-  choices.innerHTML = "";
-  let i = 0;
-  const intervalo = setInterval(() => {
-    story.textContent += texto.charAt(i);
-    i++;
-    if (i >= texto.length) {
-      clearInterval(intervalo);
-      setTimeout(callback, 500);
-    }
-  }, 25);
+var usuario_id = 1;
+var escolhas = [];
+var ordem = 1;
+var proximaEscolha = "";
+var textoOpcao = "";
+var opcoesAtuais = [];
+
+var perfil = {
+  cauteloso: 0,
+  impulsivo: 0,
+  analitico: 0,
+  emocional: 0,
+  explorador: 0
+};
+
+function registrarEscolha() {
+  escolhas.push({
+    decisao_id: proximaEscolha,
+    ordem_etapa: ordem
+  });
+  ordem++;
 }
 
-function mostrarOpcoes(opcoes) {
-  choices.innerHTML = "";
-  ending.textContent = "";
+function pontuarPerfil() {
+  var mapaDePerfil = {
+    "2a": { cauteloso: 2, analitico: 2 },
+    "2b": { cauteloso: 1, emocional: 2, explorador: 1 },
+    "2c": { impulsivo: 1, emocional: 1, explorador: 2 },
+    "3a_sucesso": { cauteloso: 3, impulsivo: 1, analitico: 2 },
+    "3b": { cauteloso: 1, analitico: 1, emocional: 2 },
+    "3c_colabora": { cauteloso: 1, emocional: 3, explorador: 1 },
+    "3d_sim": { impulsivo: 2, emocional: 2, explorador: 3 },
+    "4a": { explorador: 3, emocional: 1, impulsivo: 1 },
+    "final1": { cauteloso: 3, analitico: 2 },
+    "final5": { cauteloso: 1, impulsivo: 3, analitico: 1 },
+    "final4": { impulsivo: 2, emocional: 1, explorador: 2 }
+  };
 
-  opcoes.forEach(op => {
-    const btn = document.createElement("button");
-    btn.textContent = op.texto;
-    btn.type = "button";
-    btn.onclick = () => {
-      etapa = op.proxima;
-      executarEtapa();
-    };
-    choices.appendChild(btn);
-  });
+  var pontos = mapaDePerfil[proximaEscolha];
+  if (pontos) {
+    var {
+      cauteloso = 0,
+      impulsivo = 0,
+      analitico = 0,
+      emocional = 0,
+      explorador = 0
+    } = pontos;
+
+    perfil.cauteloso += cauteloso;
+    perfil.impulsivo += impulsivo;
+    perfil.analitico += analitico;
+    perfil.emocional += emocional;
+    perfil.explorador += explorador;
+  }
+}
+
+function exibirTexto() {
+  historia.textContent = textoOpcao;
+  final.textContent = "";
+  escolha.innerHTML = "";
+}
+
+function mostrarOpcoes() {
+  final.textContent = "";
+  var html = "";
+  for (var i = 0; i < opcoesAtuais.length; i++) {
+    var op = opcoesAtuais[i];
+    html += `<button onclick="escolherOpcao('${op.proxima}')">${op.texto}</button>`;
+  }
+  escolha.innerHTML = html;
+}
+
+function escolherOpcao(etapaEscolhida) {
+  proximaEscolha = etapaEscolhida;
+  registrarEscolha();
+  pontuarPerfil();
+  etapa = etapaEscolhida;
+  executarEtapa();
+}
+
+function salvarSessao() {
+  var dadosSessao = {
+    usuario_id: usuario_id,
+    final_id: Number(etapa.replace("final", "")),
+    escolhas: escolhas,
+    perfil: perfil
+  };
+
+  console.log("Sessão:", dadosSessao);
+
+  // Envio para backend (futuro)
+  /*
+  fetch('https://seuservidor.com/api/registrar_sessao', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(dadosSessao)
+  })
+    .then(res => res.json())
+    .then(data => console.log('Sessão salva:', data))
+    .catch(err => console.error('Erro:', err));
+  */
 }
 
 function executarEtapa() {
   switch (etapa) {
     case "inicio":
-      escreverTextoGradualmente("🌌 Você acorda sozinho após uma falha na hibernação. A nave está silenciosa... o que fazer agora?", () => {
-        mostrarOpcoes([
-          { texto: "Verificar sistemas da nave", proxima: "2a" },
-          { texto: "Procurar por outros tripulantes", proxima: "2b" },
-          { texto: "Mandar sinal para Terra ou responder sinal", proxima: "2c" }
-        ]);
-      });
+      textoOpcao = "Você acorda sozinho após uma falha na hibernação. A nave está silenciosa... o que fazer agora?";
+      exibirTexto();
+      opcoesAtuais = [
+        { texto: "Verificar sistemas da nave", proxima: "2a" },
+        { texto: "Procurar por outros tripulantes", proxima: "2b" },
+        { texto: "Mandar sinal para Terra", proxima: "2c" }
+      ];
+      mostrarOpcoes();
       break;
 
     case "2a":
-      escreverTextoGradualmente("Você se dirige ao painel de comando. Os sistemas estão falhando em cascata...", () => {
-        mostrarOpcoes([
-          { texto: "Tentar consertar sozinho", proxima: "3a_sucesso" },
-          { texto: "Pedir ajuda por rádio", proxima: "3b" }
-        ]);
-      });
+      textoOpcao = "Você se dirige ao painel de comando. Os sistemas estão falhando em cascata...";
+      exibirTexto();
+      opcoesAtuais = [
+        { texto: "Tentar consertar sozinho", proxima: "3a_sucesso" },
+        { texto: "Pedir ajuda por rádio", proxima: "3b" }
+      ];
+      mostrarOpcoes();
       break;
 
     case "2b":
-      escreverTextoGradualmente("Você caminha pelos corredores vazios da nave. Ecos... corpos em criogenia silenciosa.", () => {
-        mostrarOpcoes([
-          { texto: "Acordar um tripulante instável", proxima: "3c_colabora" },
-          { texto: "Ignorar e continuar sozinho", proxima: "3a_sucesso" }
-        ]);
-      });
+      textoOpcao = "Você caminha pelos corredores vazios da nave. Ecos... corpos em criogenia silenciosa.";
+      exibirTexto();
+      opcoesAtuais = [
+        { texto: "Acordar um tripulante", proxima: "3c_colabora" },
+        { texto: "Ignorar e continuar sozinho", proxima: "3a_sucesso" }
+      ];
+      mostrarOpcoes();
       break;
 
     case "2c":
-      escreverTextoGradualmente("Você detecta um sinal alienígena desconhecido, pulsando nos monitores.", () => {
-        mostrarOpcoes([
-          { texto: "Responder", proxima: "3d_sim" },
-          { texto: "Ignorar", proxima: "3a_sucesso" }
-        ]);
-      });
+      textoOpcao = "Ao invés de mandar você detecta um sinal desconhecido, pulsando nos monitores.";
+      exibirTexto();
+      opcoesAtuais = [
+        { texto: "Responder", proxima: "3d_sim" },
+        { texto: "Ignorar", proxima: "3a_sucesso" }
+      ];
+      mostrarOpcoes();
       break;
 
     case "3a_sucesso":
-      escreverTextoGradualmente("Você abre o painel de manutenção e começa a trabalhar com as ferramentas da nave.", () => {
-        mostrarOpcoes([
-          { texto: "Sucesso", proxima: "final1" },
-          { texto: "Fracasso", proxima: "final2" }
-        ]);
-      });
+      textoOpcao = "Você trabalha incansavelmente nos sistemas. As luzes piscam, alarmes disparam... o tempo está se esgotando.";
+      exibirTexto();
+      setTimeout(() => {
+        var sucesso = Math.random() < 0.75;
+        if (sucesso) {
+          textoOpcao = "Com um estalo final, os sistemas voltam a funcionar! Sua missão está salva!";
+          etapa = "final1";
+        } else {
+          textoOpcao = "Uma faísca... um curto-circuito... tudo apaga. A nave está perdida.";
+          etapa = "final2";
+        }
+        executarEtapa();
+      }, 4000);
       break;
 
     case "3b":
-      escreverTextoGradualmente("Você envia um sinal de socorro... mas sabe que pode ter revelado sua posição.", () => {
-        mostrarOpcoes([
-          { texto: "Alienígenas chegam", proxima: "4a" },
-          { texto: "Ninguém responde", proxima: "final2" }
-        ]);
-      });
+      textoOpcao = "Você envia um sinal de socorro... e aguarda na esperança. Mas sabe que isso pode ter revelado sua posição.";
+      exibirTexto();
+      setTimeout(() => {
+        var ajudaChega = Math.random() < 0.75;
+        if (ajudaChega) {
+          textoOpcao = "Uma nave desconhecida se aproxima... não é humana. São alienígenas respondendo ao seu sinal.";
+          etapa = "4a";
+        } else {
+          textoOpcao = "Você espera... mas ninguém responde. O silêncio é absoluto.";
+          etapa = "final2";
+        }
+        executarEtapa();
+      }, 4000);
       break;
 
     case "3c_colabora":
-      escreverTextoGradualmente("O tripulante acorda confuso.\n\n— ...hnng... onde estou? A missão... você é... humano?\n— Ok... eu lembro do protocolo de emergência. Me passa o estado dos sistemas.\n— Não vamos deixar que essa missão morra no silêncio do espaço.", () => {
-        mostrarOpcoes([
-          { texto: "Se sacrificar para salvar tudo", proxima: "final5" },
-          { texto: "Fugir sozinho", proxima: "final4" },
-          { texto: "Consertar juntos", proxima: "final1" }
-        ]);
-      });
+      textoOpcao = "O tripulante acorda confuso.\n\n— ...hnng... onde estou? A missão... você é... humano?\n— Ok... lembro do protocolo de emergência. Me passa o estado dos sistemas.\n— Temos pouco tempo. Precisamos decidir rápido.";
+      exibirTexto();
+      opcoesAtuais = [
+        { texto: "Redirecionar energia dos sistemas auxiliares", proxima: "final1" },
+        { texto: "Acessar manualmente o núcleo do reator (arriscado)", proxima: "final5" }
+      ];
+      mostrarOpcoes();
       break;
 
     case "3d_sim":
-      escreverTextoGradualmente("Uma transmissão chega... seres desconhecidos oferecem ajuda.\n\n(voz sintetizada) — Entidade consciente identificada. Medo detectado. Comunicação iniciada.", () => {
-        mostrarOpcoes([
-          { texto: "Sim", proxima: "final3" },
-          { texto: "Não", proxima: "3a_sucesso" }
-        ]);
-      });
+      textoOpcao = "Uma transmissão chega... seres desconhecidos oferecem ajuda.\n\n(voz sintetizada) — Entidade consciente identificada. Medo detectado. Comunicação iniciada.";
+      exibirTexto();
+      opcoesAtuais = [
+        { texto: "Aceitar ajuda", proxima: "final3" },
+        { texto: "Recusar e tentar consertar sozinho", proxima: "3a_sucesso" }
+      ];
+      mostrarOpcoes();
       break;
 
     case "4a":
-      escreverTextoGradualmente("A nave estremece. Uma forma gigantesca se aproxima do casco... são eles.\n\n— Você busca ajuda. Nós observamos. Sua espécie ainda sonha. Isso é... raro.\n— Você escolheu confiar. Não terá respostas — apenas revelações.", () => {
-        mostrarOpcoes([
-          { texto: "Ir com eles", proxima: "final3" },
-          { texto: "Lutar", proxima: "final2" },
-          { texto: "Fugir sozinho", proxima: "final4" }
-        ]);
-      });
+      textoOpcao = "A nave estremece. Uma forma gigantesca se aproxima do casco... são eles.\n\n— Você busca ajuda. Nós observamos. Sua espécie ainda sonha. Isso é... raro.\n— Você escolheu confiar. Não terá respostas — apenas revelações.";
+      exibirTexto();
+      opcoesAtuais = [
+        { texto: "Ir com eles", proxima: "final3" },
+        { texto: "Lutar", proxima: "final2" }
+      ];
+      mostrarOpcoes();
       break;
 
     case "final1":
@@ -134,9 +225,16 @@ function executarEtapa() {
     case "final3":
     case "final4":
     case "final5":
-      escreverTextoGradualmente("Fim da jornada.", () => {
-        ending.innerHTML = `<strong>${finais[etapa]}</strong>`;
-      });
+      textoOpcao = "Fim da jornada.";
+      exibirTexto();
+      final.innerHTML = `
+        <strong>${finais[etapa]}</strong>
+        <div style="margin-top: 20px; display: flex; gap: 10px; flex-wrap: wrap;">
+          <button onclick="location.reload()">🔁 Reiniciar Jornada</button>
+          <button onclick="window.location.href='../HTML/dashboard.html'">📊 Comparar com outros jogadores</button>
+        </div>
+      `;
+      salvarSessao();
       break;
   }
 }

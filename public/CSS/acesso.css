@@ -2,6 +2,19 @@
 
 * {
   box-sizing: border-box;
+  margin: 0;
+}
+
+body {
+  font-family: 'Orbitron', sans-serif;
+  background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+  color: #fff;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 1;
 }
 
 .banner video {
@@ -10,57 +23,42 @@
   left: 0;
   width: 100%;
   height: 100%;
-  overflow: hidden;
-  z-index: -1;
-  width: 100%;
-  height: 100%;
   object-fit: cover;
-}
-
-body {
-  position: relative;
-  z-index: 1;
-  font-family: 'Orbitron', sans-serif;
-}
-
-body {
-  font-family: 'Orbitron', sans-serif;
-  background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
-  color: #fff;
-  margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  z-index: -1;
 }
 
 .container {
   background: #111;
   border-radius: 10px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
-  position: relative;
   width: 768px;
   max-width: 100%;
   min-height: 480px;
   overflow: hidden;
+  position: relative;
+}
+
+.form-container,
+.overlay-container,
+.overlay,
+.overlay-panel {
+  position: absolute;
+  height: 100%;
+  transition: transform 0.6s ease-in-out;
 }
 
 .form-container {
-  position: absolute;
   top: 0;
-  height: 100%;
-  transition: all 0.6s ease-in-out;
+  width: 50%;
 }
 
 .sign-in-container {
   left: 0;
-  width: 50%;
   z-index: 2;
 }
 
 .sign-up-container {
   left: 0;
-  width: 50%;
   opacity: 0;
   z-index: 1;
 }
@@ -79,11 +77,11 @@ form {
   background: #222;
   display: flex;
   flex-direction: column;
-  padding: 0 50px;
-  height: 100%;
   justify-content: center;
   align-items: center;
   text-align: center;
+  padding: 0 50px;
+  height: 100%;
 }
 
 input {
@@ -103,8 +101,8 @@ button {
   color: #03e9f4;
   font-size: 14px;
   padding: 12px 45px;
-  transition: 0.3s ease;
   cursor: pointer;
+  transition: 0.3s;
 }
 
 button:hover {
@@ -113,19 +111,15 @@ button:hover {
 }
 
 .ghost {
-  background-color: transparent;
   border-color: #fff;
 }
 
 .overlay-container {
-  position: absolute;
   top: 0;
   left: 50%;
   width: 50%;
-  height: 100%;
-  overflow: hidden;
-  transition: transform 0.6s ease-in-out;
   z-index: 100;
+  overflow: hidden;
 }
 
 .container.right-panel-active .overlay-container {
@@ -135,12 +129,9 @@ button:hover {
 .overlay {
   background: linear-gradient(to right, #1e3c72, #2a5298);
   color: #fff;
-  position: relative;
   left: -100%;
-  height: 100%;
   width: 200%;
   transform: translateX(0);
-  transition: transform 0.6s ease-in-out;
 }
 
 .container.right-panel-active .overlay {
@@ -148,18 +139,14 @@ button:hover {
 }
 
 .overlay-panel {
-  position: absolute;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 0 40px;
   text-align: center;
-  top: 0;
-  height: 100%;
   width: 50%;
-  transform: translateX(0);
-  transition: transform 0.6s ease-in-out;
+  top: 0;
 }
 
 .overlay-left {

@@ -54,17 +54,6 @@ html {
     animation: floatIn 1.5s ease forwards;
 }
 
-@keyframes floatIn {
-    0% {
-        opacity: 0;
-        transform: translate(-50%, -60%);
-    }
-    100% {
-        opacity: 1;
-        transform: translate(-50%, -50%);
-    }
-}
-
 .uranu-info {
     position: absolute;
     font-size: 0.9em;
