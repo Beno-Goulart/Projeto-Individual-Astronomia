@@ -1,13 +1,13 @@
 const container = document.getElementById('container');
 document.getElementById('signUp').addEventListener('click', () => {
-  container.classList.add('right-panel-active');
+    container.classList.add('right-panel-active');
 });
 document.getElementById('signIn').addEventListener('click', () => {
-  container.classList.remove('right-panel-active');
+    container.classList.remove('right-panel-active');
 });
 
 if (window.location.hash === "#login") {
-  document.getElementById('signIn').click();
+    document.getElementById('signIn').click();
 }
 
 function cadastrar() {
@@ -22,14 +22,14 @@ function cadastrar() {
         },
         body: JSON.stringify({ nome, email, senha })
     })
-    .then(res => {
-        if (res.ok) {
-            alert("Cadastro realizado com sucesso!");
-            window.location.href = "index.html";
-        } else {
-            alert("Erro no cadastro");
-        }
-    });
+        .then(res => {
+            if (res.ok) {
+                alert("Cadastro realizado com sucesso!");
+                window.location.href = "index.html";
+            } else {
+                alert("Erro no cadastro");
+            }
+        });
 }
 
 function login() {
@@ -43,18 +43,23 @@ function login() {
         },
         body: JSON.stringify({ email, senha })
     })
-    .then(res => {
-        if (res.ok) {
-            return res.json();
-        } else {
-            throw new Error("Email e/ou senha inválidos");
-        }
-    })
-    .then(data => {
-        alert(`Bem-vindo, ${data.nome}!`);
-        window.location.href = "dashboard.html";
-    })
-    .catch(erro => {
-        alert(erro.message);
-    });
+        .then(res => {
+            if (res.ok) {
+                return res.json();
+            } else {
+                throw new Error("Email e/ou senha inválidos");
+            }
+        })
+        .then(data => {
+            sessionStorage.ID_USUARIO = data.id;
+            sessionStorage.NOME_USUARIO = data.nome;
+            sessionStorage.EMAIL_USUARIO = data.email;
+
+            alert(`Bem-vindo, ${data.nome}!`);
+            window.location.href = "game.html";
+        })
+
+        .catch(erro => {
+            alert(erro.message);
+        });
 }

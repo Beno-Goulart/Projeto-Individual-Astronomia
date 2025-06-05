@@ -93,27 +93,46 @@ function escolherOpcao(etapaEscolhida) {
 }
 
 function salvarSessao() {
-  var dadosSessao = {
-    usuario_id: usuario_id,
+  const usuario_id = sessionStorage.ID_USUARIO;
+
+  if (!usuario_id) {
+    alert("Usuário não identificado. Faça login novamente.");
+    window.location.href = "index.html";
+    return;
+  }
+
+  const dadosSessao = {
+    usuario_id: Number(usuario_id),
     final_id: Number(etapa.replace("final", "")),
     escolhas: escolhas,
     perfil: perfil
   };
 
-  console.log("Sessão:", dadosSessao);
+  console.log("Enviando dados da sessão:", dadosSessao);
 
-  // Envio para backend (futuro)
-  /*
-  fetch('https://seuservidor.com/api/registrar_sessao', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+  fetch("http://localhost:3333/sessoesJogo/salvar", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
     body: JSON.stringify(dadosSessao)
   })
-    .then(res => res.json())
-    .then(data => console.log('Sessão salva:', data))
-    .catch(err => console.error('Erro:', err));
-  */
+
+    .then(res => {
+      if (res.ok) {
+        return res.json();
+      } else {
+        throw new Error("Erro ao salvar sessão");
+      }
+    })
+    .then(data => {
+      console.log("Sessão salva no banco com sucesso:", data);
+    })
+    .catch(erro => {
+      console.error("Erro ao salvar sessão:", erro);
+    });
 }
+
 
 function executarEtapa() {
   switch (etapa) {
