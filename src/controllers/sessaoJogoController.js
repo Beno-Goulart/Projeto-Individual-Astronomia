@@ -1,6 +1,7 @@
 var database = require("../database/config");
 
 function salvarSessao(req, res) {
+    console.log("Corpo da requisição recebido:", req.body);
     const { usuario_id, final_id, escolhas, perfil } = req.body;
 
     console.log("Recebendo dados da sessão:", req.body);
@@ -10,8 +11,8 @@ function salvarSessao(req, res) {
     }
 
     const sqlSessao = `
-        INSERT INTO sessao (usuario_id, final_id, data_hora) 
-        VALUES (${usuario_id}, ${final_id}, NOW())
+        INSERT INTO sessao (usuario_id, final_id) 
+        VALUES (${usuario_id}, ${final_id})
     `;
 
     database.executar(sqlSessao).then(resultadoSessao => {
@@ -20,14 +21,14 @@ function salvarSessao(req, res) {
         let sqlEscolhas = "";
         escolhas.forEach(e => {
             sqlEscolhas += `
-                INSERT INTO escolha (sessao_id, decisao_id, ordem_etapa) 
+                INSERT INTO escolhas (sessao_id, decisao_id, ordem_etapa) 
                 VALUES (${sessao_id}, '${e.decisao_id}', ${e.ordem_etapa});
             `;
         });
 
         const sqlPerfil = `
-            INSERT INTO perfil (sessao_id, cauteloso, impulsivo, analitico, emocional, explorador)
-            VALUES (${sessao_id}, ${perfil.cauteloso}, ${perfil.impulsivo}, ${perfil.analitico}, ${perfil.emocional}, ${perfil.explorador});
+            INSERT INTO sessao (sessao_id, usuario_id, final_id, perfil_cauteloso, perfil_impulsivo, perfil_analitico, perfil_emocional, perfil_explorador)
+            VALUES (${sessao_id}, ${usuario_id}, ${final_id}, ${perfil.cauteloso}, ${perfil.impulsivo}, ${perfil.analitico}, ${perfil.emocional}, ${perfil.explorador});
         `;
 
         const sqlCompleto = sqlEscolhas + sqlPerfil;
@@ -43,14 +44,12 @@ function salvarSessao(req, res) {
     });
 }
 
-
 function buscarSessaoPorUsuario(req, res) {
     const usuario_id = req.params.usuario_id;
 
     const sql = `
         SELECT * FROM sessao 
         WHERE usuario_id = ${usuario_id}
-        ORDER BY data_hora DESC
         LIMIT 1;
     `;
 

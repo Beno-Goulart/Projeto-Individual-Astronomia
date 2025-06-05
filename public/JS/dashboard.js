@@ -1,32 +1,39 @@
-// Pizza - Distribuição de escolhas por etapa
-new Chart(document.getElementById('pizzaChart'), {
-    type: 'pie',
-    data: {
-        labels: ['Desligar sistema', 'Chamar ajuda', 'Investigar ruído', 'Ignorar alerta'],
-        datasets: [{
-            data: [40, 30, 20, 10],
-            backgroundColor: ['#4bc0c0', '#ff9f40', '#9966ff', '#ff6384']
-        }]
-    },
-    options: { plugins: { legend: { labels: { color: '#fff' } } } }
-});
+// // Pizza - Distribuição de escolhas por etapa
+// new Chart(document.getElementById('pizzaChart'), {
+//     type: 'pie',
+//     data: {
+//         labels: ['Desligar sistema', 'Chamar ajuda', 'Investigar ruído', 'Ignorar alerta'],
+//         datasets: [{
+//             data: [40, 30, 20, 10],
+//             backgroundColor: ['#4bc0c0', '#ff9f40', '#9966ff', '#ff6384']
+//         }]
+//     },
+//     options: { plugins: { legend: { labels: { color: '#fff' } } } }
+// });
 
-// Barras - Finais
+// Barras - Finais (soma 36)
 new Chart(document.getElementById('barChart'), {
     type: 'bar',
     data: {
         labels: ['Missão Cumprida', 'Missão Fracassada', 'Civilização Alien', 'Traição', 'Sacrifício'],
         datasets: [{
             label: 'Quantidade',
-            data: [95, 50, 35, 40, 25],
+            data: [12, 8, 7, 5, 4], // Total: 36
             backgroundColor: '#36a2eb'
         }]
     },
     options: {
-        scales: { x: { ticks: { color: '#fff' } }, y: { ticks: { color: '#fff' } } },
-        plugins: { legend: { labels: { color: '#fff' } } }
+        scales: {
+            x: { ticks: { color: '#fff' } },
+            y: { ticks: { color: '#fff' } }
+        },
+        plugins: {
+            legend: { labels: { color: '#fff' } }
+        }
     }
 });
+
+
 
 // // Linha - Tempo médio por etapa
 // new Chart(document.getElementById('lineChart'), {
@@ -68,7 +75,7 @@ new Chart(document.getElementById('barChart'), {
 //     }
 // });
 
-// Radar - Perfil de decisões
+// Radar - Perfil de decisões (aumentado o tamanho da fonte)
 new Chart(document.getElementById('radarChart'), {
     type: 'radar',
     data: {
@@ -91,6 +98,9 @@ new Chart(document.getElementById('radarChart'), {
                     color: '#999'
                 },
                 pointLabels: {
+                    font: {
+                        size: 17 // aumentado o tamanho da fonte
+                    },
                     color: '#fff'
                 }
             }

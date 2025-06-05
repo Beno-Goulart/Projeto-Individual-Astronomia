@@ -248,12 +248,10 @@ function executarEtapa() {
       exibirTexto();
       final.innerHTML = `
         <strong>${finais[etapa]}</strong>
-        <div style="margin-top: 20px; display: flex; gap: 10px; flex-wrap: wrap;">
-          <button onclick="location.reload()">🔁 Reiniciar Jornada</button>
-          <button onclick="window.location.href='../HTML/dashboard.html'">📊 Comparar com outros jogadores</button>
         </div>
       `;
       salvarSessao();
       break;
   }
+
 }

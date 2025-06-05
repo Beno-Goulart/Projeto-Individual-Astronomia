@@ -18,16 +18,19 @@ CREATE TABLE finais (
     descricao TEXT
 );
 
--- Sessões de jogo (cada jogada feita por um usuário)
-CREATE TABLE sessoes_jogo (
+-- Sessões de jogo
+CREATE TABLE sessao(
     id INT PRIMARY KEY AUTO_INCREMENT,
-    usuario_id INT,
-    data_inicio DATETIME DEFAULT CURRENT_TIMESTAMP,
-    data_fim DATETIME,
-    final_id INT,
-    tempo_total_segundos INT,
-    FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE,
-    FOREIGN KEY (final_id) REFERENCES finais(id) ON DELETE SET NULL
+    usuario_id INT NOT NULL,
+    final_id INT NOT NULL,
+    perfil_cauteloso INT DEFAULT 0,
+    perfil_impulsivo INT DEFAULT 0,
+    perfil_analitico INT DEFAULT 0,
+    perfil_emocional INT DEFAULT 0,
+    perfil_explorador INT DEFAULT 0,
+
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id),
+    FOREIGN KEY (final_id) REFERENCES finais(id)
 );
 
 -- Decisões disponíveis em cada etapa
@@ -40,12 +43,12 @@ CREATE TABLE decisoes (
 -- Decisões feitas por cada usuário em uma sessão
 CREATE TABLE escolhas (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    sessao_id INT,
-    decisao_id INT,
-    tempo_gasto_segundos INT,
-    ordem_etapa INT,
-    FOREIGN KEY (sessao_id) REFERENCES sessoes_jogo(id) ON DELETE CASCADE,
-    FOREIGN KEY (decisao_id) REFERENCES decisoes(id) ON DELETE CASCADE
+    sessao_id INT NOT NULL,
+    decisao_id INT NOT NULL,
+    ordem_etapa INT NOT NULL,
+
+    FOREIGN KEY (sessao_id) REFERENCES sessao(id),
+    FOREIGN KEY (decisao_id) REFERENCES decisoes(id)
 );
 
 -- Dados fixos dos finais do jogo
@@ -56,4 +59,5 @@ INSERT INTO finais (titulo, descricao) VALUES
 ('Sobrevivente Solitário', 'Você trai a missão para sobreviver sozinho.'),
 ('Sacrifício Heróico', 'Você se sacrifica para salvar a missão.');
 
-select * from sessoes_jogo;
+-- Verificar
+SELECT * FROM usuarios;

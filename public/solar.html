@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sistema Solar Interativo</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+    }
+
+    .container {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      background-image: url('../assets/imgs/solar.jpg');
+      background-size: cover;
+      background-position: center;
+    }
+
+    .planet-btn {
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      background-color: rgba(255, 255, 255, 0);
+      border: 2px solid rgba(255, 255, 255, 0);
+      border-radius: 50%;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .planet-btn:hover {
+      transform: scale(1.2);
+      background-color: rgba(255, 255, 255, 0);
+    }
+
+    .mercurio { top: 11%; left: 14%; }
+    .venus    { top: 28%; left: 15%; }
+    .terra    { top: 48%; left: 19%; }
+    .marte    { top: 80%; left: 41%; }
+    .jupiter  { top: 65%; left: 42%; }
+    .saturno  { top: 77%; left: 70%; }
+    .urano    { top: 66%; left: 80%; }
+    .netuno   { top: 52%; left: 82%; }
+    .plutao   { top: 10%; left: 87%; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="mercurio.html" class="planet-btn mercurio" title="Mercúrio"></a>
+    <a href="venus.html" class="planet-btn venus" title="Vênus"></a>
+    <a href="terra.html" class="planet-btn terra" title="Terra"></a>
+    <a href="marte.html" class="planet-btn marte" title="Marte"></a>
+    <a href="jupiter.html" class="planet-btn jupiter" title="Júpiter"></a>
+    <a href="saturno.html" class="planet-btn saturno" title="Saturno"></a>
+    <a href="urano.html" class="planet-btn urano" title="Urano"></a>
+    <a href="netuno.html" class="planet-btn netuno" title="Netuno"></a>
+    <a href="plutao.html" class="planet-btn plutao" title="Plutão"></a>
+  </div>
+</body>
+</html>

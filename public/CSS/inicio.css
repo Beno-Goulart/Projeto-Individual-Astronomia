@@ -144,14 +144,14 @@ nav img {
     display: inline-block;
     padding: 15px 30px;
     font-size: 1em;
-    background-color: #bb840d;
+    background-color: #bb840d93;
     color: white;
     text-decoration: none;
     border-radius: 5px;
 }
 
 .cta-button:hover {
-    background-color: #ff9100;
+    background-color: #ff910059;
 }
 
 nav a {
